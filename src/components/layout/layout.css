@@ -1,0 +1,339 @@
+.app-layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.app-layout-header {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.app-layout-logo {
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+
+.app-layout-panes {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  min-height: 0;
+}
+
+.app-layout-panes--single {
+  grid-template-columns: 1fr;
+}
+
+/* Shared background (same for both panes): base layer + tiled grid overlay */
+.app-layout-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.app-layout-bg-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-repeat: repeat;
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.app-layout-pane-left,
+.app-layout-pane-right {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  background: transparent;
+}
+
+.app-layout-pane-left {
+  border-right: none;
+}
+
+.app-layout-divider {
+  background-color: rgba(102, 102, 102, 0.3);
+  min-width: 1px;
+}
+
+.app-layout-pane-right {
+  border-left: none;
+}
+
+.layout-pane {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  text-align: center;
+  color: #222222;
+}
+
+.layout-pane-empty-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.layout-pane-empty-text-muted {
+  font-size: 0.875rem;
+  color: #808080;
+  margin: 0.25rem 0 0;
+}
+
+/* Dropzone and pane empty text: white on dark canvas, black on light canvas */
+.app-layout:not(.app-layout--light) .layout-pane-empty-text {
+  color: #fff;
+}
+
+.app-layout:not(.app-layout--light) .layout-pane-empty-text-muted {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.app-layout--light .layout-pane-empty-text {
+  color: #222222;
+}
+
+.app-layout--light .layout-pane-empty-text-muted {
+  color: #6b7280;
+}
+
+/* Bottom toolbar: 56px pill with blurred background; primary button is 72px and centered. */
+.bottom-toolbar {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 24px;
+  height: 56px;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 9999px;
+  box-shadow: none;
+  z-index: 10;
+}
+
+.bottom-toolbar .toolbar-btn:first-child {
+  padding-left: 1.25rem;
+}
+
+.bottom-toolbar .toolbar-btn:last-child {
+  padding-right: 1.25rem;
+}
+
+/* Pane labels: vertically aligned with center of toolbar (56px bar), left/right of window */
+.app-layout-pane-label {
+  position: fixed;
+  bottom: calc(1.5rem + 28px);
+  transform: translateY(50%);
+  z-index: 10;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+
+.app-layout-pane-label--left {
+  left: 2.5rem;
+}
+
+.app-layout-pane-label--right {
+  right: 2.5rem;
+}
+
+.app-layout--light .app-layout-pane-label {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Dark canvas: white icons. Light canvas: black icons. */
+.bottom-toolbar--inverted .toolbar-btn {
+  color: #fff;
+}
+
+.bottom-toolbar--inverted .toolbar-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #222222;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.toolbar-btn:focus-visible {
+  outline: 2px solid #222222;
+  outline-offset: 2px;
+}
+
+.toolbar-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.toolbar-btn > span {
+  font-size: 1.5rem;
+}
+
+/* Primary (center) toolbar button: 72px. Light canvas = black with white icon; dark canvas = white with dark icon */
+.toolbar-btn--primary {
+  width: 72px;
+  height: 72px;
+  background-color: #222222;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  outline: 2px solid #222222;
+  outline-offset: -2px;
+  transition: outline-offset 0.15s ease;
+}
+
+.toolbar-btn--primary:hover:not(:disabled) {
+  outline-offset: 2px;
+  background-color: #222222;
+}
+
+.bottom-toolbar--inverted .toolbar-btn--primary {
+  outline-color: #ffffff;
+  background-color: #ffffff;
+  color: #222222;
+}
+
+.bottom-toolbar--inverted .toolbar-btn--primary:hover:not(:disabled) {
+  outline-color: #ffffff;
+  background-color: #ffffff;
+}
+
+.app-layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.app-layout-header {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.app-layout-logo {
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+
+.app-layout-panes {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  min-height: 0;
+}
+
+.app-layout-panes--single {
+  grid-template-columns: 1fr;
+}
+
+/* Shared background (same for both panes): base layer + tiled grid overlay */
+.app-layout-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.app-layout-bg-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-repeat: repeat;
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.app-layout-pane-left,
+.app-layout-pane-right {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  background: transparent;
+}
+
+.app-layout-pane-left {
+  border-right: none;
+}
+
+.app-layout-divider {
+  background-color: rgba(170, 170, 170, 0.5);
+  min-width: 1px;
+}
+
+.app-layout-pane-right {
+  border-left: none;
+}
+
+.layout-pane {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  text-align: center;
+  color: #374151;
+}
+
+.layout-pane-empty-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.layout-pane-empty-text-muted {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0;
+}
+

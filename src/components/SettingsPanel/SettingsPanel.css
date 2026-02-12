@@ -1,0 +1,186 @@
+/* 24px above the toolbar (toolbar is 56px tall + 1.5rem bottom = 80px from bottom; panel bottom = 80 + 24 = 104px) */
+.settings-panel {
+  position: fixed;
+  bottom: calc(1.5rem + 56px + 24px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90vw, 320px);
+  background: rgba(102, 102, 102, 0.6);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  color: #fff;
+  border-radius: 32px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+  overflow: hidden;
+  animation: settings-panel-in 0.2s ease-out;
+}
+
+@keyframes settings-panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.settings-panel__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2rem 0.75rem;
+}
+
+.settings-panel__title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.settings-panel__body {
+  padding: 0 2rem 2rem;
+}
+
+.settings-panel__updating {
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  color: #9ca3af;
+}
+
+.settings-panel__row {
+  margin-bottom: 1rem;
+}
+
+.settings-panel__row:last-of-type {
+  margin-bottom: 0;
+}
+
+.settings-panel__label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+.settings-panel__control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Slider layout */
+.settings-panel__slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.settings-panel__slider-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.settings-panel__slider input[type='range'] {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.settings-panel__slider input[type='range']:focus-visible {
+  /* outline: 2px solid rgba(255, 255, 255, 0.7); */
+  outline-offset: 2px;
+}
+
+/* WebKit slider track & thumb */
+.settings-panel__slider input[type='range']::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.settings-panel__slider input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ffffff;
+  background-image: radial-gradient(circle at center, #000 0 4px, transparent 4px);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  margin-top: -8px; /* center thumb on 8px track */
+  cursor: pointer;
+}
+
+/* Firefox slider track & thumb */
+.settings-panel__slider input[type='range']::-moz-range-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.settings-panel__slider input[type='range']::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ffffff;
+  background-image: radial-gradient(circle at center, #000 0 4px, transparent 4px);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.settings-panel__value {
+  min-width: 2.5rem;
+  font-size: 0.8125rem;
+  color: #9ca3af;
+  text-align: right;
+}
+
+/* Background toggle */
+.settings-panel__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.25rem;
+  border-radius: 9999px;
+}
+
+.settings-panel__toggle-btn {
+  flex: 1;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 0.8125rem;
+  padding: 0.4rem 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.settings-panel__toggle-btn--active {
+  background: #ffffff;
+  color: #222222;
+}
+
+.settings-panel__toggle-btn:hover:not(.settings-panel__toggle-btn--active) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.settings-panel__toggle-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}

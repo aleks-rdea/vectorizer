@@ -1,0 +1,48 @@
+.svg-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background from shared layout layer when transparent */
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.svg-viewport--empty,
+.svg-viewport--error {
+  padding: 1.5rem;
+  text-align: center;
+  background-color: transparent;
+}
+
+.svg-viewport--error .layout-pane-empty-text-muted {
+  color: #b91c1c;
+}
+
+.svg-viewport__transform {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.svg-viewport__transform .svg-viewport__inner {
+  pointer-events: auto;
+}
+
+.svg-viewport__inner {
+  width: 100%;
+  height: 100%;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+}
+
+.svg-viewport__inner svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

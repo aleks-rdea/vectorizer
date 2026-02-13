@@ -5,7 +5,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: min(90vw, 320px);
-  background: rgba(102, 102, 102, 0.6);
+  background: rgba(80, 80, 80, 0.8);
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
   color: #fff;
@@ -42,6 +42,56 @@
   text-align: center;
 }
 
+/* Input / Output page toggle */
+.settings-panel__page-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.25rem;
+  border-radius: 9999px;
+}
+
+.settings-panel__page-toggle-btn {
+  flex: 1;
+  max-width: 140px;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.settings-panel__page-toggle-btn--active {
+  background: #ffffff;
+  color: #222222;
+}
+
+.settings-panel__page-toggle-btn:hover:not(.settings-panel__page-toggle-btn--active) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.settings-panel__page-toggle-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.settings-panel__page {
+  margin: 0;
+}
+
+.settings-panel__page-placeholder {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .settings-panel__body {
   padding: 0 2rem 2rem;
 }
@@ -64,8 +114,8 @@
   display: block;
   margin-bottom: 0.25rem;
   font-size: 0.8125rem;
-  font-weight: 500;
-  color: #e5e7eb;
+  font-weight: 700;
+  color: #fff;
 }
 
 .settings-panel__control {
@@ -118,7 +168,7 @@
   border: none;
   background-color: #ffffff;
   background-image: radial-gradient(circle at center, #000 0 4px, transparent 4px);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   margin-top: -8px; /* center thumb on 8px track */
   cursor: pointer;
 }
@@ -137,14 +187,15 @@
   border: none;
   background-color: #ffffff;
   background-image: radial-gradient(circle at center, #000 0 4px, transparent 4px);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
 
 .settings-panel__value {
   min-width: 2.5rem;
   font-size: 0.8125rem;
-  color: #9ca3af;
+  font-weight: 700;
+  color: #fff;
   text-align: right;
 }
 

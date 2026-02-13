@@ -32,7 +32,7 @@ export function AppLayout({
   leftContent,
   rightContent,
   canvasBackgroundStyle = "#fff",
-  canvasBackground = "dark",
+  canvasBackground = "mid",
   hasSvg = false,
   hasImage = false,
   isSettingsOpen = false,
@@ -86,13 +86,13 @@ export function AppLayout({
             className="app-layout-pane-label app-layout-pane-label--left"
             aria-hidden
           >
-            Original
+            Input
           </span>
           <span
             className="app-layout-pane-label app-layout-pane-label--right"
             aria-hidden
           >
-            Vectorized
+            Output
           </span>
         </>
       )}

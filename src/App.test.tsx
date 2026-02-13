@@ -33,8 +33,7 @@ describe('App', () => {
 
   it('when no image, renders full-width drop zone and add-image toolbar only', () => {
     renderApp()
-    expect(screen.getByText('Drop image here to vectorise')).toBeInTheDocument()
-    expect(screen.getByText('[png, gif, jpg]')).toBeInTheDocument()
+    expect(screen.getByText('Drop an Image Here')).toBeInTheDocument()
     expect(screen.queryByText('View vectorized version here')).not.toBeInTheDocument()
     const toolbar = screen.getByRole('toolbar', { name: 'Add image' })
     expect(toolbar).toBeInTheDocument()

@@ -15,13 +15,13 @@ function renderWithProvider(ui: React.ReactElement) {
 describe('ImageInput', () => {
   it('renders drop zone text (add button is in toolbar when used in app)', () => {
     renderWithProvider(<ImageInput />)
-    expect(screen.getByText('Drop image here to vectorise')).toBeInTheDocument()
-    expect(screen.getByText('[png, gif, jpg]')).toBeInTheDocument()
+    expect(screen.getByText('Drop an Image Here')).toBeInTheDocument()
+    expect(screen.getByText(/or paste from your clipboard/i)).toBeInTheDocument()
   })
 
   it('shows validation error when dropping unsupported file type', () => {
     renderWithProvider(<ImageInput />)
-    const dropzone = screen.getByText('Drop image here to vectorise').closest('.image-input-dropzone')
+    const dropzone = screen.getByText('Drop an Image Here').closest('.image-input-dropzone')
     expect(dropzone).toBeInTheDocument()
 
     const file = new File(['hello'], 'hello.txt', { type: 'text/plain' })

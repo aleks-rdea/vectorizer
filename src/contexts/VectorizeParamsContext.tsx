@@ -12,9 +12,13 @@ export type CanvasBackground = 'dark' | 'light' | 'mid'
 
 export type VectorizeParamsState = VectorizeOptions & {
   canvasBackground: CanvasBackground
+  /** 0.5–2; 1 = no change. Applied to input image before vectorization. */
+  contrast: number
+  /** 0–2; 1 = no change. Applied to input image before vectorization. */
+  saturation: number
 }
 
-const DEFAULT_BACKGROUND: CanvasBackground = 'dark'
+const DEFAULT_BACKGROUND: CanvasBackground = 'mid'
 
 type VectorizeParamsAction =
   | { type: 'SET'; payload: Partial<VectorizeParamsState> }
@@ -23,6 +27,8 @@ type VectorizeParamsAction =
 const initialState: VectorizeParamsState = {
   ...DEFAULT_OPTIONS,
   canvasBackground: DEFAULT_BACKGROUND,
+  contrast: 1,
+  saturation: 1,
 }
 
 function paramsReducer(

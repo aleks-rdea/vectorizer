@@ -15,7 +15,7 @@ type BottomToolbarProps = {
 }
 
 export function BottomToolbar({
-  canvasBackground = 'dark',
+  canvasBackground = 'mid',
   hasSvg = false,
   hasImage = false,
   isSettingsOpen = false,

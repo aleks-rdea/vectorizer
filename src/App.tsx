@@ -44,11 +44,16 @@ function resizeToFitMax(
 
 type ImageDataResult = { imageData: ImageData; wasResized: boolean }
 
+type ImageFilterOptions = { contrast: number; saturation: number }
+
 function imageToImageData(
   url: string,
   _width: number,
-  _height: number
+  _height: number,
+  options?: ImageFilterOptions
 ): Promise<ImageDataResult> {
+  const contrast = options?.contrast ?? 1
+  const saturation = options?.saturation ?? 1
   return new Promise((resolve, reject) => {
     const img = new Image()
     img.onload = () => {
@@ -78,6 +83,7 @@ function imageToImageData(
         reject(new Error('Canvas 2d not available'))
         return
       }
+      ctx.filter = `contrast(${contrast}) saturate(${saturation})`
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
       const imageData = ctx.getImageData(0, 0, w, h)
       if (DEBUG_IMAGE) {
@@ -105,7 +111,7 @@ function App() {
   const debouncedParams = useDebounce(params, VECTORIZE_DEBOUNCE_MS)
   const paramsKey = useMemo(
     () =>
-      `${debouncedParams.threshold}-${debouncedParams.smoothness}-${debouncedParams.detailLevel}-${debouncedParams.cornerRounding}-${debouncedParams.colorCount}`,
+      `${debouncedParams.threshold}-${debouncedParams.smoothness}-${debouncedParams.detailLevel}-${debouncedParams.cornerRounding}-${debouncedParams.colorCount}-${debouncedParams.contrast}-${debouncedParams.saturation}`,
     [debouncedParams]
   )
 
@@ -128,7 +134,10 @@ function App() {
     setIsVectorizing(true)
     setVectorizeError(null)
     /* eslint-enable react-hooks/set-state-in-effect */
-    imageToImageData(image.url, image.width, image.height)
+    imageToImageData(image.url, image.width, image.height, {
+      contrast: debouncedParams.contrast,
+      saturation: debouncedParams.saturation,
+    })
       .then(({ imageData, wasResized }) => {
         if (wasResized) {
           showToast('Image resized to fit maximum size for vectorization')

@@ -20,7 +20,9 @@ describe('VectorizeParamsContext', () => {
   it('exposes default params', () => {
     const { result } = renderParamsHook()
     expect(result.current.params).toMatchObject(DEFAULT_OPTIONS)
-    expect(result.current.params.canvasBackground).toBe('dark')
+    expect(result.current.params.canvasBackground).toBe('mid')
+    expect(result.current.params.contrast).toBe(1)
+    expect(result.current.params.saturation).toBe(1)
   })
 
   it('setParam updates a single param', () => {
@@ -48,16 +50,32 @@ describe('VectorizeParamsContext', () => {
     expect(result.current.params.cornerRounding).toBe(1.2)
   })
 
+  it('setParam updates contrast and saturation', () => {
+    const { result } = renderParamsHook()
+    act(() => {
+      result.current.setParam('contrast', 1.5)
+    })
+    expect(result.current.params.contrast).toBe(1.5)
+    act(() => {
+      result.current.setParam('saturation', 0.8)
+    })
+    expect(result.current.params.saturation).toBe(0.8)
+  })
+
   it('resetParams restores defaults', () => {
     const { result } = renderParamsHook()
     act(() => {
       result.current.setParam('threshold', 100)
       result.current.setParam('detailLevel', 10)
+      result.current.setParam('contrast', 1.8)
+      result.current.setParam('saturation', 0.5)
     })
     act(() => {
       result.current.resetParams()
     })
     expect(result.current.params).toMatchObject(DEFAULT_OPTIONS)
-    expect(result.current.params.canvasBackground).toBe('dark')
+    expect(result.current.params.canvasBackground).toBe('mid')
+    expect(result.current.params.contrast).toBe(1)
+    expect(result.current.params.saturation).toBe(1)
   })
 })
